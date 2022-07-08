@@ -46,6 +46,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function __construct()
     {
+        $this->roles = ['ROLE_USER'];
         $this->tricks = new ArrayCollection();
         $this->group_tricks = new ArrayCollection();
         $this->media = new ArrayCollection();
