@@ -21,17 +21,12 @@ class Media
     #[ORM\Column(type: 'array')]
     private $type = [];
 
-    #[ORM\OneToMany(mappedBy: 'media', targetEntity: Trick::class)]
-    private $tricks;
-
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'media')]
     #[ORM\JoinColumn(nullable: false)]
     private $user;
 
-    public function __construct()
-    {
-        $this->tricks = new ArrayCollection();
-    }
+    #[ORM\ManyToOne(inversedBy: 'media')]
+    private ?Trick $trick = null;
 
     public function getId(): ?int
     {
@@ -62,36 +57,6 @@ class Media
         return $this;
     }
 
-    /**
-     * @return Collection<int, Trick>
-     */
-    public function getTricks(): Collection
-    {
-        return $this->tricks;
-    }
-
-    public function addTrick(Trick $trick): self
-    {
-        if (!$this->tricks->contains($trick)) {
-            $this->tricks[] = $trick;
-            $trick->setMedia($this);
-        }
-
-        return $this;
-    }
-
-    public function removeTrick(Trick $trick): self
-    {
-        if ($this->tricks->removeElement($trick)) {
-            // set the owning side to null (unless already changed)
-            if ($trick->getMedia() === $this) {
-                $trick->setMedia(null);
-            }
-        }
-
-        return $this;
-    }
-
     public function getUser(): ?User
     {
         return $this->user;
@@ -100,6 +65,18 @@ class Media
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getTrick(): ?Trick
+    {
+        return $this->trick;
+    }
+
+    public function setTrick(?Trick $trick): self
+    {
+        $this->trick = $trick;
 
         return $this;
     }

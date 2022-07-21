@@ -2,31 +2,25 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\User;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
-class AppFixtures extends Fixture
+class AppFixtures extends Fixture implements DependentFixtureInterface
 {
-    private UserPasswordHasherInterface $hasher;
 
-    public function __construct(UserPasswordHasherInterface $hasher)
+    public function getDependencies()
     {
-        $this->hasher = $hasher;
+        return [
+            UserFixtures::class,
+            GroupFixtures::class,
+            TrickFixtures::class,
+            MediaFixtures::class,
+            CommentaryFixtures::class
+        ];
     }
 
     public function load(ObjectManager $manager)
     {
-        $user = new User();
-        $user->setUsername('admin')
-            ->setEmail("admin@test.com")
-            ->setUrlImage("test")
-            ->setRoles(["ROLE_ADMIN"]);
-        $password = $this->hasher->hashPassword($user, 'test');
-        $user->setPassword($password);
-
-        $manager->persist($user);
-        $manager->flush();
     }
 }
