@@ -1,0 +1,21 @@
+.baniere {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 120vh;
+    background-image: url('../images/bigPicture.jpg');
+    background-size: cover;
+    background-position: center bottom;
+    box-shadow: rgb(38, 57, 77) 0 20px 30px -10px;
+}
+
+.baniere>h1 {
+    padding-bottom: 600px;
+    margin: auto;
+}
+
+.allTricks {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}

@@ -3,13 +3,24 @@
 {% block title %}Snow Trick{% endblock %}
 
 {% block body %}
-  <h1>Snow Tricks !!!</h1>
-  <div class="card" style="width: 18rem;">
-    <img src="..." class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
-    </div>
+
+  {# <img src="https://www.fillmurray.com/640/360" class="card-img-top" alt="..."> #}
+  <div class="baniere"><h1>Snow Tricks</h1></div>
+ 
+  
+  <div class="allTricks">
+    {% for trick in tricks|sort((a, b) => a.name <=> b.name) %}
+      <div class="card" style="width: 35rem; margin:25px;">
+        <img src="http://via.placeholder.com/720x420" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">{{ trick.name|upper }}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">Catégorie : {{ trick.groupTrick.name }}</h6>
+          <p class="card-text">description : {{ trick.description }}</p>
+          <footer class="blockquote-footer">Créé par {{ trick.user.username }} <cite title="Source Title">le {{ trick.createdAt|date("d/m/Y") }}</cite></footer>
+          <a href="#" class="btn btn-primary">Voir le detail</a>
+        </div>
+      </div>
+    {% endfor %}
   </div>
+  
 {% endblock %}
