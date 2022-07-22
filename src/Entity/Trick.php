@@ -35,10 +35,10 @@ class Trick
     #[ORM\JoinColumn(nullable: false)]
     private $group_trick;
 
-    #[ORM\OneToMany(mappedBy: 'trick', targetEntity: Commentary::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'trick', targetEntity: Commentary::class, cascade: ["persist", "remove"], orphanRemoval: true)]
     private $commentaries;
 
-    #[ORM\OneToMany(mappedBy: 'trick', targetEntity: Media::class)]
+    #[ORM\OneToMany(mappedBy: 'trick', targetEntity: Media::class, cascade: ["persist", "remove"])]
     private Collection $media;
 
     public function __construct()
