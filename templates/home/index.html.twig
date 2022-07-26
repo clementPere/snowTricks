@@ -15,7 +15,7 @@
   
   <div id="allTricks" class="allTricks">
     {% for trick in tricks|sort((a, b) => a.name <=> b.name) %}
-      <div class="card bg-dark text-white" style="width: 25rem; margin:25px;">
+      <div class="card bg-dark text-white" style="width: 25rem; margin:30px;">
 
 
       {% for key, media in trick.media%}
