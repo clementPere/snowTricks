@@ -21,13 +21,6 @@
 
 {% endfor %}
 
-{% for media in trick.media[1:] %}
-  <div class="item {%if loop.index == 1%} active {%endif%}">
- <!-- le reste des images si sup à 1-->
- <img src="{{ media.url }}" alt="{{ media.type[0] }}">
- </div>
-{% endfor %}
-
 
 
 
