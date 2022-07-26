@@ -12,15 +12,21 @@ class MediaFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        for ($i = 0; $i < 10; $i++) {
+        $j = 1;
+        for ($i = 0; $i < 24; $i++) {
+
             $media = new Media();
             $array = ["image"];
             $media->setUrl('http://via.placeholder.com/720x420')
                 ->setType($array)
                 ->setUser($manager->getRepository(User::class)->find(rand(1, 11)))
-                ->setTrick($manager->getRepository(Trick::class)->find(rand(1, 12)));
+                ->setTrick($manager->getRepository(Trick::class)->find($j));
             $manager->persist($media);
-            $manager->flush();
+            $j++;
+            if ($j === 13) {
+                $j = 1;
+            }
         }
+        $manager->flush();
     }
 }

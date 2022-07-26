@@ -25,7 +25,6 @@ class HomeController extends AbstractController
     #[Route('/', name: 'app_home')]
     public function index(Request $request): Response
     {
-
         return $this->render('home/index.html.twig', [
             'tricks' => $this->getAllTricks($request),
         ]);
@@ -34,7 +33,7 @@ class HomeController extends AbstractController
     private function getAllTricks(Request $request)
     {
         $data = $this->em->getRepository(Trick::class)->findAll();
-        return $this->paginator->paginate($data, $request->query->getInt("page", 1), 6);
+        return $this->paginator->paginate($data, $request->query->getInt("page", 1), 8);
     }
 
     #[Route('/trick/{id}', name: 'show_trick')]
