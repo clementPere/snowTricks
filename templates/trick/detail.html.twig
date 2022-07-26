@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Snow Trick{% endblock %}
+
+{% block body %}
+  <div class="allTricks">
+      <div class="card" style="width: 35rem; margin:25px;">
+        <img src="http://via.placeholder.com/720x420" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">{{ trick.name|upper }}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">Catégorie : {{ trick.groupTrick.name }}</h6>
+          <p class="card-text">description : {{ trick.description }}</p>
+          <footer class="blockquote-footer">Créé par {{ trick.user.username }} <cite title="Source Title">le {{ trick.createdAt|date("d/m/Y") }}</cite></footer>
+          <a href="{{ path('app_home') }}" class="btn btn-primary">Retour</a>
+        </div>
+      </div>
+  </div>
+
+{% for media in trick.media%}
+<p>{{media.url}}</p>
+
+{% endfor %}
+
+{% for media in trick.media[1:] %}
+  <div class="item {%if loop.index == 1%} active {%endif%}">
+ <!-- le reste des images si sup à 1-->
+ <img src="{{ media.url }}" alt="{{ media.type[0] }}">
+ </div>
+{% endfor %}
+
+
+
+
+{% endblock %}

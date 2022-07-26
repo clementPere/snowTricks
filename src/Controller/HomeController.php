@@ -37,15 +37,13 @@ class HomeController extends AbstractController
         return $this->paginator->paginate($data, $request->query->getInt("page", 1), 6);
     }
 
-
-
-
-
     #[Route('/trick/{id}', name: 'show_trick')]
     public function getDetailTrick(int $id): Response
     {
+
         $trick = $this->em->getRepository(Trick::class)->find($id);
-        return $this->render('home/detail.html.twig', [
+
+        return $this->render('trick/detail.html.twig', [
             'trick' => $trick
         ]);
     }
@@ -55,7 +53,7 @@ class HomeController extends AbstractController
     public function updateTrick(int $id): Response
     {
         $trick = $this->em->getRepository(Trick::class)->find($id);
-        return $this->render('home/update.html.twig', [
+        return $this->render('trick/update.html.twig', [
             'trick' => $trick
         ]);
     }

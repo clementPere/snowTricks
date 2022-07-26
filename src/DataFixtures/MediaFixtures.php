@@ -15,7 +15,7 @@ class MediaFixtures extends Fixture
         for ($i = 0; $i < 10; $i++) {
             $media = new Media();
             $array = ["image"];
-            $media->setUrl('http://lorempixel.com/')
+            $media->setUrl('http://via.placeholder.com/720x420')
                 ->setType($array)
                 ->setUser($manager->getRepository(User::class)->find(rand(1, 11)))
                 ->setTrick($manager->getRepository(Trick::class)->find(rand(1, 12)));
