@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Commentary;
 use App\Entity\Trick;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -30,20 +31,13 @@ class HomeController extends AbstractController
         ]);
     }
 
-    private function getAllTricks(Request $request)
-    {
-        $data = $this->em->getRepository(Trick::class)->findAll();
-        return $this->paginator->paginate($data, $request->query->getInt("page", 1), 8);
-    }
-
     #[Route('/trick/{id}', name: 'show_trick')]
-    public function getDetailTrick(int $id): Response
+    public function getDetailTrick(int $id, Request $request): Response
     {
-
         $trick = $this->em->getRepository(Trick::class)->find($id);
-
         return $this->render('trick/detail.html.twig', [
-            'trick' => $trick
+            'trick' => $trick,
+            'commentaries' => $this->getAllCommentary($request)
         ]);
     }
 
@@ -69,5 +63,17 @@ class HomeController extends AbstractController
         $em->getRepository(Trick::class)->remove($getTrick);
         $em->flush();
         return $this->redirectToRoute('app_home');
+    }
+
+    private function getAllTricks(Request $request)
+    {
+        $data = $this->em->getRepository(Trick::class)->findAll();
+        return $this->paginator->paginate($data, $request->query->getInt("page", 1), 8);
+    }
+
+    private function getAllCommentary(Request $request)
+    {
+        $data = $this->em->getRepository(Commentary::class)->findAll();
+        return $this->paginator->paginate($data, $request->query->getInt("page", 1), 10);
     }
 }

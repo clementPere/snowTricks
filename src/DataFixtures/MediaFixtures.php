@@ -17,7 +17,7 @@ class MediaFixtures extends Fixture
 
             $media = new Media();
             $array = ["image"];
-            $media->setUrl('http://via.placeholder.com/720x420')
+            $media->setUrl("https://picsum.photos/1920/1080?random=" . $i)
                 ->setType($array)
                 ->setUser($manager->getRepository(User::class)->find(rand(1, 11)))
                 ->setTrick($manager->getRepository(Trick::class)->find($j));

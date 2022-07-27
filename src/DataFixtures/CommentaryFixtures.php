@@ -18,7 +18,7 @@ class CommentaryFixtures extends Fixture
 
         for ($i = 0; $i < 20; $i++) {
             $commentary = new Commentary();
-            $commentary->setContent($faker->realText())
+            $commentary->setContent($faker->realText(rand(100, 600)))
                 ->setUser($manager->getRepository(User::class)->find(rand(1, 11)))
                 ->setTrick($manager->getRepository(Trick::class)->find(rand(1, 12)))
                 ->setCreatedAt(new DateTimeImmutable('now'));

@@ -14,22 +14,7 @@
     margin: auto;
 }
 
-.allTricks {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-}
 
 .pagination {
     justify-content: center;
-}
-
-.allTricks>div>div>a {
-    color: #FFF;
-    text-decoration: none;
-    width: 50%;
-}
-
-.allTricks>div>div>a:hover {
-    color: grey;
 }
