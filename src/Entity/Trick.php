@@ -41,6 +41,9 @@ class Trick
     #[ORM\OneToMany(mappedBy: 'trick', targetEntity: Media::class, cascade: ["persist", "remove"])]
     private Collection $media;
 
+    #[ORM\Column(length: 255)]
+    private ?string $slug = null;
+
     public function __construct()
     {
         $this->commentaries = new ArrayCollection();
@@ -180,6 +183,18 @@ class Trick
                 $medium->setTrick(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }

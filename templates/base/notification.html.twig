@@ -1,0 +1,9 @@
+
+
+{% block body %}
+    {% for message in app.flashes('notice') %}
+        <div class="flash-notice">
+            <div class="alert alert-success w-100 mb-0" role="alert"> {{message}} </div>
+        </div>
+    {% endfor %}
+{% endblock %}

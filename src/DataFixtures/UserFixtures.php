@@ -46,7 +46,7 @@ class UserFixtures extends Fixture
             $user->setUsername($firstname . ' ' . $lastname)
                 ->setEmail($firstname . '.' . $lastname . '@' . $faker->freeEmailDomain)
                 ->setUrlImage("https://picsum.photos/1920/1080?random=" . $i);
-            $password = $this->hasher->hashPassword($user, $faker->firstName . '.' . $faker->lastName . '1234');
+            $password = $this->hasher->hashPassword($user, $firstname . '.' . $lastname . '1234');
             $user->setPassword($password);
             $manager->persist($user);
         }

@@ -5,11 +5,6 @@
 {% block body %}
 
   <div class="baniere">
-      {% for message in app.flashes('notice') %}
-        <div class="flash-notice">
-            <div class="alert alert-success w-100 mb-0" role="alert"> {{message}} </div>
-        </div>
-      {% endfor %}
     <h1>Snow Tricks</h1>
   </div>
   
@@ -25,7 +20,7 @@
       {% endfor %}
         
         <div class="card-body">
-          <a href="{{ path('show_trick',{"id": trick.id}) }}" title="Voir le détail">
+          <a href="{{ path('show_trick',{"slug": trick.slug}) }}" title="Voir le détail">
             <h5 class="card-title">Nom de la figure : {{ trick.name|upper }}</h5>
           </a>
           <h6 class="card-subtitle mb-2 text-muted">Catégorie : {{ trick.groupTrick.name }}</h6>

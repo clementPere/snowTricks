@@ -16,7 +16,7 @@ class CommentaryFixtures extends Fixture
     {
         $faker = Faker\Factory::create('fr_FR');
 
-        for ($i = 0; $i < 20; $i++) {
+        for ($i = 0; $i < 100; $i++) {
             $commentary = new Commentary();
             $commentary->setContent($faker->realText(rand(100, 600)))
                 ->setUser($manager->getRepository(User::class)->find(rand(1, 11)))

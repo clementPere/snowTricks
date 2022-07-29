@@ -9,14 +9,20 @@
         "ext-iconv": "*",
         "doctrine/doctrine-migrations-bundle": "^3.2",
         "knplabs/knp-paginator-bundle": "^5.8",
+        "sensio/framework-extra-bundle": "^6.2",
         "symfony/console": "6.1.*",
         "symfony/dotenv": "6.1.*",
+        "symfony/expression-language": "6.1.*",
         "symfony/flex": "^2",
+        "symfony/form": "6.1.*",
         "symfony/framework-bundle": "6.1.*",
         "symfony/runtime": "6.1.*",
         "symfony/security-bundle": "6.1.*",
+        "symfony/security-core": "6.1.*",
+        "symfony/validator": "6.1.*",
         "symfony/webpack-encore-bundle": "^1.15",
-        "symfony/yaml": "6.1.*"
+        "symfony/yaml": "6.1.*",
+        "twig/extra-bundle": "^3.4"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.4",

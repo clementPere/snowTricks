@@ -60,6 +60,7 @@ class TrickFixtures extends Fixture
         foreach ($tricks as $name => $description) {
             $trick = new Trick;
             $trick->setName($name)
+                ->setSlug(str_replace(" ", "-", $name))
                 ->setDescription($description)
                 ->setGroupTrick($manager->getRepository(GroupTrick::class)->findOneBy(["name" => $group]))
                 ->setUser($manager->getRepository(User::class)->find(rand(1, 11)))
