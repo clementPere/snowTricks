@@ -28,6 +28,11 @@ class GroupTrick
     #[ORM\JoinColumn(nullable: false)]
     private $user;
 
+    public function __toString()
+    {
+        return $this->name;
+    }
+
     public function __construct()
     {
         $this->tricks = new ArrayCollection();
