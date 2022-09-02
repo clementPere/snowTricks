@@ -17,7 +17,6 @@ class CommentaryType extends AbstractType
                 'placeholder' => 'Entrez votre message ici ...',
                 'class' => 'form-control required textareaCommentary',
                 'rows' => '4'
-
             ]
         ]);
     }

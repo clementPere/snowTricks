@@ -38,16 +38,16 @@ class Trick
     #[ORM\OneToMany(mappedBy: 'trick', targetEntity: Commentary::class, cascade: ["persist", "remove"], orphanRemoval: true)]
     private $commentaries;
 
-    #[ORM\OneToMany(mappedBy: 'trick', targetEntity: Media::class, cascade: ["persist", "remove"])]
-    private Collection $media;
-
     #[ORM\Column(length: 255)]
     private ?string $slug = null;
+
+    #[ORM\OneToMany(mappedBy: 'trick', targetEntity: Media::class, cascade: ["persist", "remove"], orphanRemoval: true)]
+    private Collection $medias;
 
     public function __construct()
     {
         $this->commentaries = new ArrayCollection();
-        $this->media = new ArrayCollection();
+        $this->medias = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -157,36 +157,6 @@ class Trick
         return $this;
     }
 
-    /**
-     * @return Collection<int, Media>
-     */
-    public function getMedia(): Collection
-    {
-        return $this->media;
-    }
-
-    public function addMedium(Media $medium): self
-    {
-        if (!$this->media->contains($medium)) {
-            $this->media[] = $medium;
-            $medium->setTrick($this);
-        }
-
-        return $this;
-    }
-
-    public function removeMedium(Media $medium): self
-    {
-        if ($this->media->removeElement($medium)) {
-            // set the owning side to null (unless already changed)
-            if ($medium->getTrick() === $this) {
-                $medium->setTrick(null);
-            }
-        }
-
-        return $this;
-    }
-
     public function getSlug(): ?string
     {
         return $this->slug;
@@ -194,7 +164,41 @@ class Trick
 
     public function setSlug(string $slug): self
     {
+        if (str_contains(" ", $slug)) {
+            $slug = str_replace(" ", "-", $slug);
+        }
+
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Media>
+     */
+    public function getMedias(): Collection
+    {
+        return $this->medias;
+    }
+
+    public function addMedia(Media $media): self
+    {
+        if (!$this->medias->contains($media)) {
+            $this->medias[] = $media;
+            $media->setTrick($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMedia(Media $media): self
+    {
+        if ($this->medias->removeElement($media)) {
+            // set the owning side to null (unless already changed)
+            if ($media->getTrick() === $this) {
+                $media->setTrick(null);
+            }
+        }
 
         return $this;
     }

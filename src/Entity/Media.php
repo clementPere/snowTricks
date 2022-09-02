@@ -15,8 +15,8 @@ class Media
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'string', length: 255)]
-    private $url;
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private ?string $url = null;
 
     #[ORM\Column(type: 'array')]
     private $type = [];
@@ -25,8 +25,16 @@ class Media
     #[ORM\JoinColumn(nullable: false)]
     private $user;
 
-    #[ORM\ManyToOne(inversedBy: 'media')]
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $fileName = null;
+
+    #[ORM\ManyToOne(inversedBy: 'medias')]
     private ?Trick $trick = null;
+
+    public function __toString()
+    {
+        return $this->url;
+    }
 
     public function getId(): ?int
     {
@@ -38,7 +46,7 @@ class Media
         return $this->url;
     }
 
-    public function setUrl(string $url): self
+    public function setUrl(?string $url): self
     {
         $this->url = $url;
 
@@ -65,6 +73,18 @@ class Media
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getFileName(): ?string
+    {
+        return $this->fileName;
+    }
+
+    public function setFileName(?string $fileName): self
+    {
+        $this->fileName = $fileName;
 
         return $this;
     }
