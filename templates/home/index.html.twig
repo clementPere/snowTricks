@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Snow Trick
+{% block title %}Snow Trick - Accueil
 {% endblock %}
 
 {% block body %}
@@ -15,10 +15,10 @@
 
 				{% for key, media in trick.medias%}
 					{% if key == 0 %}
-						{% if media.fileName != null and media.type[0] == 'image' %}
+						{% if media.fileName == null and media.type[0] == 'image' %}
+							<img src="{{ media.url }}" class="card-img-top imgHome" alt="...">
+						{% elseif media.fileName != null%}
 							<img src="{{ asset('uploads/'~media.fileName)}}" class="card-img-top" alt="...">
-						{% elseif media.fileName == null and media.type[0] == 'image' %}
-							<img src="{{ media.url}}" class="card-img-top" alt="...">
 						{% elseif media.type[0] == 'video' %}
 							<div class="video-responsive">
 								<iframe width="560" height="315" src="{{ media.url }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

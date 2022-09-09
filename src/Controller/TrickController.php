@@ -46,7 +46,7 @@ class TrickController extends AbstractController
             //Si il y a une url dans la requête et pas de fichier
             if ($form->getData()->getMedias()[0]->getUrl() and !$request->files->get('trick')['medias'][0]['fileMedia']) {
                 $getUrl = $form->getData()->getMedias()[0]->getUrl();
-                $media->setUrl($this->refactoYoutubeVideo($getUrl))
+                $media->setUrl($this->refactoYoutubeVideoUrl($getUrl))
                     ->setType(['video']);
             }
 
@@ -55,7 +55,7 @@ class TrickController extends AbstractController
                 $file = $request->files->get('trick')['medias'][0]['fileMedia'];
                 $getUrl = $form->getData()->getMedias()[0]->getUrl();
                 $em->persist($this->newMedia($trick, '', $this->uploadFile($request, $slugger), $file->getClientOriginalExtension()));
-                $media->setUrl($this->refactoYoutubeVideo($getUrl))
+                $media->setUrl($this->refactoYoutubeVideoUrl($getUrl))
                     ->setType(['video']);
             }
 
@@ -109,7 +109,7 @@ class TrickController extends AbstractController
         }
     }
 
-    private function refactoYoutubeVideo($url)
+    private function refactoYoutubeVideoUrl($url)
     {
         if (str_contains($url, 'https://www.youtube.com/watch?v=')) {
             $url = str_replace("watch?v=", "embed/", $url);

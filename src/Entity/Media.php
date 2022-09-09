@@ -3,9 +3,9 @@
 namespace App\Entity;
 
 use App\Repository\MediaRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 #[ORM\Entity(repositoryClass: MediaRepository::class)]
 class Media
@@ -16,6 +16,7 @@ class Media
     private $id;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Assert\Url(message: 'The url {{ value }} is not a valid url')]
     private ?string $url = null;
 
     #[ORM\Column(type: 'array')]

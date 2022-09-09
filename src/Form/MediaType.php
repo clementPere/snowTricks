@@ -18,14 +18,14 @@ class MediaType extends AbstractType
     {
         $builder
             ->add('url', TextareaType::class, [
-                'label' => 'Entrer une URL',
+                'label' => 'Entrer une Url pour ajouter une vidéo (Seulement les vidéo YouTube sont accepté)',
                 'attr' => [
                     'placeholder' => 'Ex: https://www.youtube.com/...',
                 ],
                 'required' => false,
             ])
             ->add('fileMedia', FileType::class, [
-                'label' => 'Upload une image jpeg/png',
+                'label' => 'Upload une image au format jpeg ou png',
                 'required' => false,
                 'mapped' => false,
                 'constraints' => [
@@ -34,7 +34,9 @@ class MediaType extends AbstractType
                         'mimeTypes' => [
                             'image/*',
                         ],
-                        'mimeTypesMessage' => 'Erreur ! merci de nous partager une image (format jpg/png, max 1024KB)',
+                        'mimeTypesMessage' => 'Format de l\'image non valide - format accepté : jpg ou png !',
+                        'maxSizeMessage' => 'Taille de l\'image non valide - taille max : 1024KB !',
+                        'notReadableMessage' => 'Impossible de lire le fichier !',
                     ])
                 ],
             ]);
