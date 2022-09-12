@@ -34,6 +34,6 @@ class CommentaryController extends AbstractController
         );
         $em->getRepository(Commentary::class)->remove($commentary);
         $em->flush();
-        return $this->redirectToRoute('show_trick', ['id' => $commentary->getTrick()->getId()]);
+        return $this->redirectToRoute('show_trick', ['slug' => $commentary->getTrick()->getSlug()]);
     }
 }

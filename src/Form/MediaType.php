@@ -18,14 +18,14 @@ class MediaType extends AbstractType
     {
         $builder
             ->add('url', TextareaType::class, [
-                'label' => 'Entrer une Url pour ajouter une vidéo (Seulement les vidéo YouTube sont accepté)',
+                'label' => 'Ajouter une image/video',
                 'attr' => [
                     'placeholder' => 'Ex: https://www.youtube.com/...',
                 ],
                 'required' => false,
             ])
             ->add('fileMedia', FileType::class, [
-                'label' => 'Upload une image au format jpeg ou png',
+                'label' => 'Upload une image au format jpeg ou png (max: 1024KB)',
                 'required' => false,
                 'mapped' => false,
                 'constraints' => [
@@ -40,7 +40,6 @@ class MediaType extends AbstractType
                     ])
                 ],
             ]);
-
         // ->add('save', SubmitType::class);
     }
 

@@ -1,7 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Snow Trick - modification{% endblock %}
+{% block title %}Snow Trick - modification
+{% endblock %}
 
 {% block body %}
-    
+	<main class="mainNewTrickForm pt-2 bg-light text-dark">
+		<form enctype="multipart/form-data" class="newTrickForm m-5 bg-dark text-white" name="updateTrick" method="post">
+			{% include('base/trickForm.html.twig') %}
+		</form>
+	</main>
 {% endblock %}

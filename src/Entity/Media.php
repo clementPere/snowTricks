@@ -16,7 +16,7 @@ class Media
     private $id;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    #[Assert\Url(message: 'The url {{ value }} is not a valid url')]
+    #[Assert\Url(protocols: ['http', 'https'], message: 'The url {{ value }} is not a valid url')]
     private ?string $url = null;
 
     #[ORM\Column(type: 'array')]

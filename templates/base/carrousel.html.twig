@@ -6,7 +6,7 @@
 				{# Si le premier élément du carousel est une image avec une url #}
 				{% if key == 0 and media.type[0] == 'image' and media.url != null %}
 					<div class="carousel-item active">
-						<img src="{{ media.url }}" class="d-block w-100 h-100" alt="...">
+						<img src="{{ media.url }}" class="d-block w-100 h-100" title="Image ajouté par {{ media.user.username }}" alt="{{ media.type[0] }} qui illustre la figure {{ trick.name}}">
 					</div>
 					{# Si le premier élément du carousel est une video avec une url #}
 				{% elseif  key == 0 and media.type[0] == 'video' and media.url != null %}
@@ -16,7 +16,7 @@
 					{# Si le premier élément du carousel est une image à récuperer depuis le dossier media #}
 				{% elseif key == 0 and media.type[0] == 'image' and media.fileName != null %}
 					<div class="carousel-item active">
-						<img src="{{ asset('uploads/'~media.fileName)}}" class="card-img-top" alt="...">
+						<img src="{{ asset('uploads/'~media.fileName)}}" class="card-img-top" title="Image ajouté par {{ media.user.username }}" alt="{{ media.type[0] }} qui illustre la figure {{ trick.name}}">
 					</div>
 					{# Si l'élément du carousel est une video avec une url #}
 				{% elseif media.type[0] == 'video' %}
@@ -26,12 +26,12 @@
 					{# Si l'élément du carousel est une image avec une url #}
 				{% elseif media.type[0] == 'image' and media.url != null %}
 					<div class="carousel-item">
-						<img src="{{ media.url }}" class="d-block w-100 h-100" alt="...">
+						<img src="{{ media.url }}" class="d-block w-100 h-100" title="Image ajouté par {{ media.user.username }}" alt="{{ media.type[0] }} qui illustre la figure {{ trick.name}}">
 					</div>
 					{# Sinon on affiche une image depuis notre dossier media #}
 				{% else %}
 					<div class="carousel-item active">
-						<img src="{{ asset('uploads/'~media.fileName)}}" class="card-img-top" alt="...">
+						<img src="{{ asset('uploads/'~media.fileName)}}" class="card-img-top" title="Image ajouté par {{ media.user.username }}" alt="{{ media.type[0] }} qui illustre la figure {{ trick.name}}">
 					</div>
 				{% endif %}
 			{% endfor %}
