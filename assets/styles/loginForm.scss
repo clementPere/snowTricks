@@ -1,3 +1,36 @@
 .loginForm {
-    padding-top: 150px;
+    padding: 0px;
+    margin: 0px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    background-color: rgba(0, 0, 0, 0.7);
+    width: 50%;
+    margin: auto;
+    box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+}
+
+
+
+.baniereAuthentication {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-bottom: 25vh;
+    min-height: 110vh;
+    background-image: url('https://images.pexels.com/photos/417173/pexels-photo-417173.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&dpr=1');
+    background-size: cover;
+    background-position: center bottom;
+    box-shadow: rgb(38, 57, 77) 0 20px 30px -10px;
+
+}
+
+
+.inputLoginForm {
+    width: 50%;
+}
+
+@media screen and (max-width:685px) {
+    .inputLoginForm {
+        width: 90%;
+    }
 }

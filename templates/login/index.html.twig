@@ -1,24 +1,37 @@
-
 {% extends 'base.html.twig' %}
 
 
-
 {% block body %}
-    {% if error %}
-        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
-    
-    <form class="loginForm" action="{{ path('app_login') }}" method="post">
-        <label for="username">Email:</label>
-        <input type="text" id="username" name="_username" value="{{ last_username }}"/>
+	{% if error %}
+		<div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+	{% endif %}
+	<div class="baniereAuthentication">
+		<form class="loginForm" action="{{ path('app_login') }}" method="post">
+			<div class="m-auto inputLoginForm">
+				<label class="form-label text-white text-start" for="username">Email</label>
+				<input class="form-control" type="email" id="username" name="_username" placeholder="exemple@gmail.com" required value="{{ last_username }}"/>
+			</div>
 
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="_password"/>
+			<div class="m-auto inputLoginForm">
+				<label class="form-label text-white pt-3" for="password">Mot de passe</label>
+				<input class="form-control" type="password" id="password" required name=" _password">
+			</div>
 
-        {# If you want to control the URL the user is redirected to on success #}
-        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-        <input type="hidden" name="_target_path" value="back_to_your_page"/>
+			<div class="text-end m-auto inputLoginForm">
+				<a class="link-primary mx-2 mt-4" href="#!">Mot de passe oublié ?</a>
+			</div>
 
-        <button type="submit">login</button>
-    </form>
-{% endblock %}
+			<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+			<input type="hidden" name="_target_path" value="back_to_your_page"/>
+			<div class="w-100 text-center">
+				<button class="btn btn-primary btn-block mb-4 mt-4" type="submit">Se connecter</button>
+			</div>
+
+			<div class="text-center text-white">
+				<p>Pas encore membre ?
+					<a href="#!">Créer mon compte</a>
+				</p>
+			</button>
+		</div>
+	</form>
+</div>{% endblock %}
