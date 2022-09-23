@@ -29,7 +29,7 @@ class RegistrationController extends AbstractController
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {
         if ($this->checkIfConnected->index()) {
-            $this->addFlash('notice', 'Vous êtes déjà connecté !');
+            $this->addFlash('danger', 'Vous êtes déjà connecté !');
             return $this->redirectToRoute('app_home');
         }
         $user = new User();
@@ -48,7 +48,7 @@ class RegistrationController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
             $this->addFlash(
-                'notice',
+                'success',
                 'Un email vous a été envoyer afin de valider votre compte'
             );
             // generate a signed url and email it to the user

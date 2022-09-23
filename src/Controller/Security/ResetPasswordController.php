@@ -27,7 +27,7 @@ class ResetPasswordController extends AbstractController
     public function index(Request $request, EntityManagerInterface $em, UserPasswordHasherInterface $passwordHasher): Response
     {
         if ($this->checkIfConnected->index()) {
-            $this->addFlash('notice', 'Vous êtes déjà connecté !');
+            $this->addFlash('danger', 'Vous êtes déjà connecté !');
             return $this->redirectToRoute('app_home');
         }
         $user = $this->userRepository->findOneBy(["email" => $_GET['email']]);
@@ -40,7 +40,7 @@ class ResetPasswordController extends AbstractController
             $user->setPassword($hashedPassword);
             $em->persist($user);
             $em->flush();
-            $this->addFlash('notice', 'La modification à réussi ! Vous pouvez maintenant essayer de vous connecter avec votre nouveau mot de passe.');
+            $this->addFlash('success', 'La modification à réussi ! Vous pouvez maintenant essayer de vous connecter avec votre nouveau mot de passe.');
             return $this->redirectToRoute('app_login');
         }
         return $this->renderForm('reset_password/index.html.twig', [
@@ -52,7 +52,7 @@ class ResetPasswordController extends AbstractController
     public function getUsername(): Response
     {
         if ($this->checkIfConnected->index()) {
-            $this->addFlash('notice', 'Vous êtes déjà connecté !');
+            $this->addFlash('danger', 'Vous êtes déjà connecté !');
             return $this->redirectToRoute('app_home');
         }
         return $this->render('reset_password/get_email.html.twig', []);
@@ -62,7 +62,7 @@ class ResetPasswordController extends AbstractController
     public function verifyAndSendEmail(Request $request): RedirectResponse
     {
         if ($this->checkIfConnected->index()) {
-            $this->addFlash('notice', 'Vous êtes déjà connecté !');
+            $this->addFlash('danger', 'Vous êtes déjà connecté !');
             return $this->redirectToRoute('app_home');
         }
         $route = 'app_security_get_username';
@@ -79,6 +79,7 @@ class ResetPasswordController extends AbstractController
             $this->sendEmail($email);
             return true;
         }
+        $this->addFlash('danger', 'Aucun compte avec cette adresse trouvé');
         return false;
     }
 
@@ -91,10 +92,10 @@ class ResetPasswordController extends AbstractController
             ->text('Sending emails is fun again!')
             ->htmlTemplate('reset_password/email.html.twig')
             ->context([
-                'expiration_date' => new \DateTime('+1 days'),
+                'expiration_date' => new \DateTime('+1 hour', new \DateTimeZone('Europe/Paris')),
                 'emailAdress' => $email,
             ]);
         $this->mailer->send($newEmail);
-        $this->addFlash('notice', 'Un email vous a été envoyé à l\'adresse ' . $email);
+        $this->addFlash('success', 'Un email vous a été envoyé à l\'adresse ' . $email);
     }
 }

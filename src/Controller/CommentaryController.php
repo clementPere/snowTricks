@@ -29,7 +29,7 @@ class CommentaryController extends AbstractController
         $em = $this->em->getManager();
         $commentary = $this->em->getRepository(Commentary::class)->find($id);
         $this->addFlash(
-            'notice',
+            'success',
             'Commentaire supprimé !'
         );
         $em->getRepository(Commentary::class)->remove($commentary);

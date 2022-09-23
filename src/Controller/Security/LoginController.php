@@ -19,7 +19,7 @@ class LoginController extends AbstractController
     public function index(AuthenticationUtils $authenticationUtils, Request $request): Response
     {
         if ($this->checkIfConnected->index()) {
-            $this->addFlash('notice', 'Vous êtes déjà connecté !');
+            $this->addFlash('danger', 'Vous êtes déjà connecté !');
             return $this->redirectToRoute('app_home');
         }
 

@@ -95,7 +95,7 @@ class TrickController extends AbstractController
                 ]);
             }
             $this->addFlash(
-                'notice',
+                'success',
                 'La figure : ' . $trick->getName() . ' à bien été ajouté'
             );
             $em->persist($trick, $media);
@@ -154,7 +154,7 @@ class TrickController extends AbstractController
         $em = $this->em->getManager();
         $getTrick = $this->em->getRepository(Trick::class)->find($trick);
         $this->addFlash(
-            'notice',
+            'success',
             'la figure "' . $getTrick->getName() . '" à bien été supprimé'
         );
         $em->getRepository(Trick::class)->remove($getTrick);
@@ -167,7 +167,7 @@ class TrickController extends AbstractController
         $this->em->getManager()->persist($data);
         $this->em->getManager()->flush();
         $this->addFlash(
-            'notice',
+            'success',
             'Commentaire ajouté'
         );
         return $this->redirectToRoute('show_trick', ['slug' => $data->getTrick()->getSlug()]);
