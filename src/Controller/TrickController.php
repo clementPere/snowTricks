@@ -153,9 +153,7 @@ class TrickController extends AbstractController
                 'success',
                 'Commentaire ajouté'
             );
-            return $this->redirectToRoute('show_trick', ['slug' => $comment->getTrick()->getSlug()]);
         }
-
         return $this->render('trick/detail.html.twig', [
             'trick' => $trick,
             'commentaries' => $this->getAllCommentary($request, $trick->getId()),
