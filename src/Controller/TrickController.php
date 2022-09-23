@@ -139,11 +139,27 @@ class TrickController extends AbstractController
     public function getDetailTrick(Trick $trick, Request $request): Response
     {
         $trick = $this->em->getRepository(Trick::class)->find($trick);
-        $form = $this->getCommentaryForm($trick, $request);
+
+        $comment = new Commentary();
+        $comment->setCreatedAt(new DateTimeImmutable())
+            ->setUser($this->getUser())
+            ->setTrick($trick);
+        $form = $this->createForm(CommentaryType::class, $comment);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->em->getManager()->persist($comment);
+            $this->em->getManager()->flush();
+            $this->addFlash(
+                'success',
+                'Commentaire ajouté'
+            );
+            return $this->redirectToRoute('show_trick', ['slug' => $comment->getTrick()->getSlug()]);
+        }
+
         return $this->render('trick/detail.html.twig', [
             'trick' => $trick,
             'commentaries' => $this->getAllCommentary($request, $trick->getId()),
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 
@@ -160,17 +176,6 @@ class TrickController extends AbstractController
         $em->getRepository(Trick::class)->remove($getTrick);
         $em->flush();
         return $this->redirectToRoute('app_home');
-    }
-
-    private function addNewData($data)
-    {
-        $this->em->getManager()->persist($data);
-        $this->em->getManager()->flush();
-        $this->addFlash(
-            'success',
-            'Commentaire ajouté'
-        );
-        return $this->redirectToRoute('show_trick', ['slug' => $data->getTrick()->getSlug()]);
     }
 
     private function newMedia(Trick $trick, string $url = '', string $fileName = '', string $extension = ''): Media
@@ -190,19 +195,6 @@ class TrickController extends AbstractController
         return $this->paginator->paginate($data, $request->query->getInt("page", 1), 10);
     }
 
-    private function getCommentaryForm($trick, Request $request)
-    {
-        $comment = new Commentary();
-        $comment->setCreatedAt(new DateTimeImmutable())
-            ->setUser($this->getUser())
-            ->setTrick($trick);
-        $form = $this->createForm(CommentaryType::class, $comment);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->addNewData($comment);
-        }
-        return $form->createView();
-    }
     private function uploadFile(Request $request, SluggerInterface $slugger)
     {
         $file = $request->files->get('trick')['medias'][0]['fileMedia'];

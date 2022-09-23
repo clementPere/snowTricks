@@ -1,7 +1,6 @@
 {% block body %}
-
 	<section style="background-color: #eee;">
-		<div class="container">
+		<div class="container pt-4">
 			<div class="row d-flex justify-content-center">
 				<div class="col-md-12 col-lg-10 col-xl-8">
 					<div class="card mb-3">
@@ -46,31 +45,32 @@
 
 
 					{% if app.user %}
-						<form name="form" method="post">
-							{{ form_start(form)}}
-							<div class="card-footer py-3 border-0" style="background-color: #f8f9fa;">
-								<div class="d-flex flex-start w-100">
-									{% if app.user.urlImage starts with 'https' %}
-										<img class="rounded-circle shadow-1-strong" src="{{ app.user.urlImage }}" alt="avatar" width="60" height="60"/>
-									{% else %}
-										<img class="rounded-circle shadow-1-strong" src="{{ asset('uploads/'~app.user.urlImage) }}" width="60" height="60">
-									{% endif %}
-									<div class="form-outline w-100">
-										{{ form_widget(form.content) }}
-									</div>
-								</div>
-								<a href="#getTrick" class="btn btn-outline-primary mt-2 pt-1">Remonter la page
-									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-up-circle" viewbox="0 0 16 16">
-										<path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z"/></svg>
-								</a>
-								<div class="float-end mt-2 pt-1">
-									<button type="submit" class="btn btn-primary btn-sm">Ajouter ce commentaire</button>
-									<button type="button" class="btn btn-outline-primary btn-sm">Annuler</button>
+
+
+						{{ form_start(form)}}
+						<div class="card-footer py-3 border-0" style="background-color: #f8f9fa;">
+							<div class="d-flex flex-start w-100">
+								{% if app.user.urlImage starts with 'https' %}
+									<img class="rounded-circle shadow-1-strong" src="{{ app.user.urlImage }}" alt="avatar" width="60" height="60"/>
+								{% else %}
+									<img class="rounded-circle shadow-1-strong" src="{{ asset('uploads/'~app.user.urlImage) }}" width="60" height="60">
+								{% endif %}
+								<div class="form-outline w-100">
+									{{ form_widget(form.content) }}
 								</div>
 							</div>
+							<a href="#getTrick" class="btn btn-outline-primary mt-2 pt-1">Remonter la page
+								<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-up-circle" viewbox="0 0 16 16">
+									<path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z"/></svg>
+							</a>
+							<div class="float-end mt-2 pt-1">
+								<button type="submit" class="btn btn-primary btn-sm">Ajouter ce commentaire</button>
+								<button type="button" class="btn btn-outline-primary btn-sm">Annuler</button>
+							</div>
 						</div>
-						{{ form_end(form)}}
-					</form>
+					</div>
+					{{ form_end(form)}}
+
 				{% else %}
 					<div class="card-footer py-3 border-0" style="background-color: #f8f9fa;">
 						<div class="d-flex justify-content-between w-100">
@@ -91,9 +91,7 @@
 			</div>
 		</div>
 	</div>
-</section>
-
-
-<div class="pagination mt-3">
-	{{ knp_pagination_render(commentaries) }}
-</div>{% endblock %}
+	<div class="pagination mt-3">
+		{{ knp_pagination_render(commentaries) }}
+	</div>
+</section>{% endblock %}

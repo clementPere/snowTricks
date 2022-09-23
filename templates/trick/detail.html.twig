@@ -4,8 +4,9 @@
 {% endblock %}
 
 {% block body %}
-	<div class="body" id="getTrick" style="background-color: #eee;">
-		<div class="allTricks">
+	<div class="body" id="getTrick">
+		<div class="allTricks" style="background-color: #eee;">
+
 			<div class="card bg-dark text-white detailTrick" style="width: 70rem; margin:25px;">
 				<div class="card-img-top">
 					{% include('base/carrousel.html.twig') %}
@@ -42,5 +43,7 @@
 			</div>
 		</div>
 	</div>
+
 	{{ include('commentary/index.html.twig') }}
+
 {% endblock %}

@@ -4,16 +4,15 @@
 {% endblock %}
 
 {% block body %}
-
-	<form class="loginForm" action="{{ path('app_security_send_email') }}" method="post">
-		<div class="m-auto inputLoginForm">
-			<label class="form-label text-white text-start" for="email">Email</label>
-			<input class="form-control" type="email" id="email" name="_email" placeholder="exemple@gmail.com" required/>
-		</div>
-		<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-		<input type="hidden" name="_target_path" value="back_to_your_page"/>
-		<div class="w-100 text-center">
-			<button class="btn btn-primary btn-block mb-4 mt-4" type="submit">Envoyer</button>
-		</div>
-	</form>
+	<div class="baniereAuthentication">
+		<form class="loginForm" action="{{ path('app_security_send_email') }}" method="post">
+			<div class="m-auto inputLoginForm">
+				<label class="form-label text-white text-start" for="email">Email</label>
+				<input class="form-control" type="email" id="email" name="_email" placeholder="exemple@gmail.com" required/>
+			</div>
+			<div class="w-100 text-center">
+				<button class="btn btn-primary btn-block mb-4 mt-4" type="submit">Envoyer</button>
+			</div>
+		</form>
+	</div>
 {% endblock %}
