@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Snow Trick - Enregistrement
+{% endblock %}
+
+{% block body %}
+	<div class="baniereAuthentication">
+
+		{% for flash_error in app.flashes('verify_email_error') %}
+			<div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+		{% endfor %}
+
+
+		<form class="loginForm" method="post">
+			{{ form_start(registrationForm) }}
+
+			<div class="row inputLoginForm m-auto">
+				<div class="col text-white">
+					{{ form_row(registrationForm.username) }}
+				</div>
+			</div>
+			<div class="row inputLoginForm m-auto">
+				<div class="col text-white">
+					{{ form_row(registrationForm.email) }}
+				</div>
+			</div>
+			<div class="row inputLoginForm m-auto">
+				<div class="col text-white">
+					{{ form_row(registrationForm.plainPassword, {label: 'Mot de passe'}) }}
+
+				</div>
+			</div>
+			<div class="row inputLoginForm m-auto">
+				<div class="col text-white">
+					{{ form_row(registrationForm.url_image) }}
+					{# {% if urlError is defined %}
+											<p class="invalid-feedback d-block">Url non valide</p>
+										{% endif %} #}
+				</div>
+			</div>
+
+
+			<div class="w-100 text-end">
+				<button class="btn btn-primary btn-block mx-4" type="submit">Valider</button>
+			</div>
+
+			{{ form_end(registrationForm) }}
+		</form>
+	</div>
+{% endblock %}

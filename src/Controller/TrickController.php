@@ -6,12 +6,10 @@ use App\Entity\Commentary;
 use App\Entity\Media;
 use App\Entity\Trick;
 use App\Form\CommentaryType;
-use App\Form\MediaType;
 use App\Form\TrickType;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
-use Exception;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -20,7 +18,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use Symfony\Component\HttpFoundation\File\File;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
@@ -69,7 +66,7 @@ class TrickController extends AbstractController
             //Si il y a une url dans la requête et pas de fichier
             if ($getUrl and !$file) {
                 if ($this->getTypeOfMedia($getUrl) == ['image']) {
-                    $media->setUrl($this->checkImageUrl($getUrl))
+                    $media->setUrl($getUrl)
                         ->setType($this->getTypeOfMedia($getUrl));
                 } else {
                     $media->setUrl($this->refactoYoutubeVideoUrl($getUrl))
@@ -88,21 +85,23 @@ class TrickController extends AbstractController
                 }
             }
             $trick->setSlug($trick->getName());
-
             $media->setTrick($trick);
-
-
             $errors = $validator->validate([$trick, $media]);
             if (count($errors) > 0) {
-                $errorsString = (string) $errors;
-                throw new \Exception($errorsString);
+                return $this->render('trick/new.html.twig', [
+                    'controller_name' => 'TrickController',
+                    'form' => $form->createView(),
+                    'urlError' => true
+                ]);
             }
-
+            $this->addFlash(
+                'notice',
+                'La figure : ' . $trick->getName() . ' à bien été ajouté'
+            );
             $em->persist($trick, $media);
             $em->flush();
-            if (!$getUrl and !$file) {
-                $em->getRepository(Media::class)->remove($media);
-            }
+
+            $this->checkMedia($em);
             return $this->redirectToRoute('app_home');
         }
         return $this->render('trick/new.html.twig', [
@@ -167,7 +166,11 @@ class TrickController extends AbstractController
     {
         $this->em->getManager()->persist($data);
         $this->em->getManager()->flush();
-        return $this->redirectToRoute('show_trick', ['id' => $data->getTrick()->getId()]);
+        $this->addFlash(
+            'notice',
+            'Commentaire ajouté'
+        );
+        return $this->redirectToRoute('show_trick', ['slug' => $data->getTrick()->getSlug()]);
     }
 
     private function newMedia(Trick $trick, string $url = '', string $fileName = '', string $extension = ''): Media
@@ -180,9 +183,10 @@ class TrickController extends AbstractController
             ->setFileName($fileName);
         return $media;
     }
+
     private function getAllCommentary(Request $request, int $trickId)
     {
-        $data = $this->em->getRepository(Commentary::class)->findBy(['trick' => $trickId]);
+        $data = $this->em->getRepository(Commentary::class)->findBy(['trick' => $trickId], ['created_at' => 'DESC']);
         return $this->paginator->paginate($data, $request->query->getInt("page", 1), 10);
     }
 
@@ -225,15 +229,6 @@ class TrickController extends AbstractController
         }
     }
 
-    private function checkImageUrl($url): string
-    {
-        $extension = pathinfo($url, PATHINFO_EXTENSION);
-        if ($extension == 'jpg' or $extension == 'jpeg' or $extension == 'png') {
-            return $url;
-        }
-        throw new \Exception('Erreur pour l\'adresse "' . $url . '" url non valide');
-    }
-
     private function refactoYoutubeVideoUrl($url)
     {
         if (str_contains($url, 'https://www.youtube.com/watch?v=')) {
@@ -241,5 +236,16 @@ class TrickController extends AbstractController
             return substr($url, 0, strpos($url, "&"));
         }
         throw new \Exception('Erreur pour l\'adresse "' . $url . '" url non valide');
+    }
+
+    private function checkMedia(EntityManagerInterface $em): void
+    {
+        $arrayMedia = $em->getRepository(Media::class)->findAll();
+        foreach ($arrayMedia as $media) {
+            if ($media->getUrl() === null and $media->getFileName() === null) {
+                $em->remove($media);
+                $em->flush();
+            }
+        }
     }
 }

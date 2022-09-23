@@ -15,3 +15,15 @@
     transform: rotate(360deg);
     -webkit-transform: rotate(360deg);
 }
+
+.userImage {
+    position: absolute;
+    top: 5;
+    right: 0;
+}
+
+@media screen and (max-width:991px) {
+    .userImage {
+        display: none;
+    }
+}

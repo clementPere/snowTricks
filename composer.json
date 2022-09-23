@@ -16,6 +16,8 @@
         "symfony/flex": "^2",
         "symfony/form": "6.1.*",
         "symfony/framework-bundle": "6.1.*",
+        "symfony/mailer": "6.1.*",
+        "symfony/mailjet-mailer": "6.1.*",
         "symfony/mime": "6.1.*",
         "symfony/runtime": "6.1.*",
         "symfony/security-bundle": "6.1.*",
@@ -23,6 +25,7 @@
         "symfony/validator": "6.1.*",
         "symfony/webpack-encore-bundle": "^1.15",
         "symfony/yaml": "6.1.*",
+        "symfonycasts/verify-email-bundle": "^1.11",
         "twig/extra-bundle": "^3.4"
     },
     "require-dev": {

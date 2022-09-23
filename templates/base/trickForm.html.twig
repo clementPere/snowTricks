@@ -12,9 +12,17 @@
 	</div>
 	<h3 class="d-flex justify-content-center">Ajouter une image et/ou video</h3>
 	<div class="form-group d-flex justify-content-around w-100">
-		<div class="m-5">
-			{{ form_row(form.medias) }}
-		</div>
+		{% for media in form.medias %}
+			<div class="m-5">
+				{{ form_row(media.url) }}
+				{% if urlError is defined %}
+					<p class="invalid-feedback d-block">Url non valide</p>
+				{% endif %}
+			</div>
+			<div class="m-5">
+				{{ form_row(media.fileMedia) }}
+			</div>
+		{% endfor %}
 
 	</div>
 	<div class="form-group d-flex justify-content-end mb-2 mx-5">

@@ -30,7 +30,8 @@ class UserFixtures extends Fixture
         $user->setUsername('admin')
             ->setEmail("admin@test.com")
             ->setUrlImage("https://images.pexels.com/photos/848609/pexels-photo-848609.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&dpr=1")
-            ->setRoles(["ROLE_ADMIN"]);
+            ->setRoles(["ROLE_ADMIN"])
+            ->setIsVerified(true);
         $password = $this->hasher->hashPassword($user, 'test');
         $user->setPassword($password);
         $manager->persist($user);
@@ -57,7 +58,8 @@ class UserFixtures extends Fixture
             $lastname = $faker->lastName;
             $user->setUsername($firstname . ' ' . $lastname)
                 ->setEmail($firstname . '.' . $lastname . '@' . $faker->freeEmailDomain)
-                ->setUrlImage($arrayImageUrl[$i]);
+                ->setUrlImage($arrayImageUrl[$i])
+                ->setIsVerified(true);
             $password = $this->hasher->hashPassword($user, $firstname . '.' . $lastname . '1234');
             $user->setPassword($password);
             $manager->persist($user);

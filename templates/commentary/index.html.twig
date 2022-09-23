@@ -14,7 +14,11 @@
 						{% for commentary in commentaries %}
 							<div class="card-body">
 								<div class="d-flex flex-start align-items-center">
-									<img class="rounded-circle shadow-1-strong me-3" src="{{ commentary.user.urlImage }}" alt="avatar" width="60" height="60"/>
+									{% if commentary.user.urlImage starts with 'https' %}
+										<img class="rounded-circle shadow-1-strong me-3" src="{{ commentary.user.urlImage }}" alt="avatar" width="60" height="60"/>
+									{% else %}
+										<img class="rounded-circle shadow-1-strong me-3" src="{{ asset('uploads/'~commentary.user.urlImage) }}" width="60" height="60">
+									{% endif %}
 									<div>
 										<h6 class="fw-bold text-primary mb-1">{{ commentary.user.username }}</h6>
 										<p class="text-muted small mb-0">
@@ -46,7 +50,11 @@
 							{{ form_start(form)}}
 							<div class="card-footer py-3 border-0" style="background-color: #f8f9fa;">
 								<div class="d-flex flex-start w-100">
-									<img class="rounded-circle shadow-1-strong me-3" src="{{ app.user.urlImage }}" alt="avatar" width="40" height="40"/>
+									{% if app.user.urlImage starts with 'https' %}
+										<img class="rounded-circle shadow-1-strong" src="{{ app.user.urlImage }}" alt="avatar" width="60" height="60"/>
+									{% else %}
+										<img class="rounded-circle shadow-1-strong" src="{{ asset('uploads/'~app.user.urlImage) }}" width="60" height="60">
+									{% endif %}
 									<div class="form-outline w-100">
 										{{ form_widget(form.content) }}
 									</div>

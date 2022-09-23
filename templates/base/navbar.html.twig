@@ -17,6 +17,13 @@
 						<li class="nav-item">
 							<a class="nav-link" href="{{path('app_logout')}}">Déconnexion</a>
 						</li>
+						<div class="userImage">
+							{% if app.user.urlImage starts with 'https' %}
+								<img class="rounded-circle shadow-1-strong me-3" src="{{ app.user.urlImage }}" alt="avatar" width="40" height="40"/>
+							{% else %}
+								<img class="rounded-circle shadow-1-strong me-3" src="{{ asset('uploads/'~app.user.urlImage) }}" width="40" height="40">
+							{% endif %}
+						</div>
 					{% else %}
 						<li class="nav-item">
 							<a class="nav-link" href="{{path('app_login')}}">Connexion</a>
