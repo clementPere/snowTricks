@@ -30,7 +30,8 @@ class ResetPasswordController extends AbstractController
             $this->addFlash('danger', 'Vous êtes déjà connecté !');
             return $this->redirectToRoute('app_home');
         }
-        $user = $this->userRepository->findOneBy(["email" => $_GET['email']]);
+
+        $user = $this->userRepository->findOneBy(["email" => $request->query->get("email")]);
         $form = $this->createForm(ResetPasswordType::class, $user);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
