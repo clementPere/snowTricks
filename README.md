@@ -1,10 +1,8 @@
 # SnowTricks
 Creation of a community snow tricks blog in symfony
-<p align="center">
-    <a href="https://www.php.net/" target="_blank">
-        <img src="https://seeklogo.com/images/S/symfony-logo-AA34C8FC16-seeklogo.com.png"/>
-    </a>
-</p>
+<p align="center"><a href="https://symfony.com" target="_blank">
+    <img src="https://symfony.com/logos/symfony_black_02.svg">
+</a></p>
 
 ---
 
@@ -35,5 +33,5 @@ Creation of a community snow tricks blog in symfony
 > 
 > Launch migration: `php bin/console d:m:m -n`
 > 
-> Launch fixtures: `php bin/console doctrine:fixtures:load -`
+> Launch fixtures: `php bin/console doctrine:fixtures:load -n`
                 
