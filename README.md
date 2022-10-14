@@ -15,7 +15,7 @@ Creation of a community snow tricks blog in symfony
 - Apache:v2.4
 - MySQL:v5.7
 
----
+
 
 # Installation
 * Clone repository using `git clone`
@@ -24,7 +24,7 @@ Creation of a community snow tricks blog in symfony
 * Database: `DATABASE_URL="mysql://root:root@127.0.0.1:3306/snow_tricks?serverVersion=5.7&charset=utf8mb4"`
 * Maildev: `MAILER_DSN=smtp://127.0.0.1:25`
 
----
+
 
 # Fixtures
 * Add fake data using `composer fixtures`
