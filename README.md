@@ -30,7 +30,10 @@ Creation of a community snow tricks blog in symfony
 * Add fake data using `composer fixtures`
 * This script runs the following commands:
 > Drop database: `php bin/console doctrine:database:drop --if-exists -f`
+> 
 > Recreate database: `php bin/console doctrine:database:create`
+> 
 > Launch migration: `php bin/console d:m:m -n`
+> 
 > Launch fixtures: `php bin/console doctrine:fixtures:load -`
                 
