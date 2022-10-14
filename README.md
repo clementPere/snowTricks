@@ -1,3 +1,5 @@
+# SnowTricks
+Creation of a community snow tricks blog in symfony
 <p align="center">
     <a href="https://www.php.net/" target="_blank">
         <img src="https://cdn.worldvectorlogo.com/logos/symfony.svg"/>
@@ -5,8 +7,7 @@
 </p>
 
 ---
-# SnowTricks
-Creation of a community snow tricks blog in symfony
+
 # Requirements
 - PHP:v8.1
 - Composer:v2.0
