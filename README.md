@@ -7,11 +7,11 @@ Creation of a community snow tricks blog in symfony
 ---
 
 # Requirements
-- PHP:v8.1
-- Composer:v2.0
-- Symfony 6.1
-- Apache:v2.4
-- MySQL:v5.7
+- PHP v8.1
+- Composer v2.0
+- Symfony v6.1
+- Apache v2.4
+- MySQL v5.7
 
 
 
