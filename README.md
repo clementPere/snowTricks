@@ -12,7 +12,7 @@ Creation of a community snow tricks blog in symfony
 - Symfony v6.1
 - Apache v2.4
 - MySQL v5.7
-
+- Npm 6.14
 
 
 # Installation
@@ -35,3 +35,7 @@ Creation of a community snow tricks blog in symfony
 > 
 > Launch fixtures: `php bin/console doctrine:fixtures:load -n`
                 
+# Launch Application in local
+* Launch symfony server `symfony serve`
+* Launch webpack compilation `npm run serve`
+* Launch MailDev `maildev --web 80 --smtp 25 --ip 127.0.0.1 --hide-extensions STARTTLS`
